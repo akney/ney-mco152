@@ -1,16 +1,16 @@
 package ney.anagrams;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class MostAnagrams {
 	public static void main(String args[]) {
 		try {
-			Scanner input = new Scanner(new File("US.dic"));
+			BufferedReader input = new BufferedReader(new File("US.dic"));
 			// makes a HashMap for a word group
 			HashMap<Character, Integer> wordGroup = new HashMap<Character, Integer>();
 
@@ -19,7 +19,7 @@ public class MostAnagrams {
 			HashMap<HashMap<Character, Integer>, ArrayList<String>> anagrams = new HashMap<HashMap<Character, Integer>, ArrayList<String>>();
 
 			// making the first hash group
-			String word = input.next();
+			String word = input.readLine();
 			ArrayList<String> words = new ArrayList<>();
 			for (int i = 0; i < word.length(); i++) {
 				if (!wordGroup.containsKey(word.charAt(i))) {
@@ -31,11 +31,13 @@ public class MostAnagrams {
 			words.add(word);
 			anagrams.put(wordGroup, words);
 
-			while (input.hasNext()) {
+			String line;
+
+			while ((line = input.readLine()) != null) {
 				wordGroup = new HashMap<Character, Integer>();
 				words = new ArrayList<>();
 
-				word = input.next(); // get next word
+				word = input.readLine(); // get next word
 
 				for (int i = 0; i < word.length(); i++) { // figure out the
 															// word's word group

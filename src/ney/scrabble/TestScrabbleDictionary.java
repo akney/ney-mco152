@@ -10,7 +10,7 @@ public class TestScrabbleDictionary {
 		ScrabbleDictionary sc = new ScrabbleDictionary();
 		boolean word = sc.contains("data");
 
-		Assert.assertEquals(true, word);
+		Assert.assertTrue(word);
 	}
 
 }
