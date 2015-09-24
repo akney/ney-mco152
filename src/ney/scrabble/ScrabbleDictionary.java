@@ -27,4 +27,6 @@ public class ScrabbleDictionary {
 		return set.contains(word);
 			
 	}
+	
+
 }
