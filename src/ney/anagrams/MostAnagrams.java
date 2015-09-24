@@ -1,8 +1,9 @@
 package ney.anagrams;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class MostAnagrams {
 	public static void main(String args[]) {
 		try {
-			BufferedReader input = new BufferedReader(new File("US.dic"));
+			BufferedReader input = new BufferedReader(new FileReader("US.dic"));
 			// makes a HashMap for a word group
 			HashMap<Character, Integer> wordGroup = new HashMap<Character, Integer>();
 
@@ -86,6 +87,9 @@ public class MostAnagrams {
 			}
 
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

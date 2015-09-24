@@ -1,23 +1,27 @@
 package ney.scrabble;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class ScrabbleDictionary {
 	private HashSet<String> set;
 
 	public ScrabbleDictionary() {
 		try {
-			Scanner input = new Scanner(new File("US.dic"));
+			BufferedReader input = new BufferedReader(new FileReader("US.dic"));
 			set = new HashSet<String>();
-			while (input.hasNext()) {
-				set.add(input.next());
+			String line;
+			while ((line = input.readLine()) != null) {
+				set.add(input.readLine());
 			}
 			input.close();
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -25,8 +29,7 @@ public class ScrabbleDictionary {
 
 	public boolean contains(String word) {
 		return set.contains(word);
-			
+
 	}
-	
 
 }

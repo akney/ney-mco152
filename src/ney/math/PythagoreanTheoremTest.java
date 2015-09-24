@@ -28,4 +28,5 @@ public class PythagoreanTheoremTest {
 
 		Assert.assertEquals(3, pT.getA(), .01);
 	}
+
 }
