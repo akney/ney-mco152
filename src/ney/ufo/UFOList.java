@@ -1,5 +1,7 @@
 package ney.ufo;
 
-public class UFOList {
+import java.util.ArrayList;
+
+public class UFOList extends ArrayList<UFOSighting> {
 
 }
