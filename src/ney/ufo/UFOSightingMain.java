@@ -3,6 +3,8 @@ package ney.ufo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+//import java.util.HashMap;
+import java.util.TreeMap;
 
 import com.google.gson.Gson;
 
@@ -17,6 +19,17 @@ public class UFOSightingMain {
 
 		in.close();
 
-		System.out.print(list.size());
+		System.out.println(list.size());
+		System.out.println(list.get(5));
+
+		TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+
+		for (UFOSighting ufo : list) {
+			if (map.containsKey(ufo.getLocation())) {
+				map.put(ufo.getLocation(), map.get(ufo.getLocation()) + 1);
+			} else {
+				map.put(ufo.getLocation(), 1);
+			}
+		}
 	}
 }
