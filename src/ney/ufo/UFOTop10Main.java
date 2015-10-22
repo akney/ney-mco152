@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.gson.Gson;
 
@@ -28,16 +29,19 @@ public class UFOTop10Main {
 			}
 		}
 
-		UFOSort sortedMap = new UFOSort(map);
-		map = sortedMap.getSortedMap();
-		int count = 0;
+		TreeMap<Integer, String> tmap = new TreeMap<>();
+
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			tmap.put(entry.getValue(), entry.getKey());
+		}
+
+		int count = 0;
+		for (Map.Entry<Integer, String> entry : tmap.entrySet()) {
 			count++;
-			if (count < 11) {
-				System.out.println(entry.getKey() + ": " + entry.getValue() + " times");
-			} else {
-				break;
+			if (count >= tmap.size() - 10) {
+				System.out.println(entry.getValue() + ": " + entry.getKey() + " times");
 			}
+
 		}
 
 	}
