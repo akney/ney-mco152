@@ -29,7 +29,7 @@ public class ProjectileComponent extends JComponent {
 			int y2 = (int) (p.getLocationY() + .05);
 
 			g.setColor(Color.RED);
-			g.drawLine(x1, 600 - y1, x2, 600 - y2);
+			g.drawLine(x1, getHeight() - y1, x2, getHeight() - y2);
 
 		}
 		// g.drawLine(0, 500, 800, 500);
