@@ -7,7 +7,7 @@ public class Projectile {
 	private double time;
 	private double radians;
 
-	public Projectile(double angle,  double velocity, double time) {
+	public Projectile(double angle, double velocity, double time) {
 		this.angle = angle;
 		this.velocity = velocity;
 		this.time = time;
@@ -15,12 +15,12 @@ public class Projectile {
 	}
 
 	public double getLocationX() {
-		Double x = Math.sin(radians) * velocity * time;
+		double x = Math.sin(radians) * velocity * time;
 		return x;
 	}
 
 	public double getLocationY() {
-		Double y = Math.cos(radians) * velocity * time - (.5 * 9.8 * time * time);
+		double y = Math.cos(radians) * velocity * time - .5 * 9.8 * time * time;
 		return y;
 	}
 

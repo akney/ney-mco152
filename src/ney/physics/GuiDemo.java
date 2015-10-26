@@ -1,9 +1,8 @@
-package ney.gui;
+package ney.physics;
 
 public class GuiDemo {
-
 	public static void main(String[] args) {
-		SmileJFrame frame = new SmileJFrame();
+		ProjectileJFrame frame = new ProjectileJFrame();
 
 		frame.setVisible(true);
 	}
