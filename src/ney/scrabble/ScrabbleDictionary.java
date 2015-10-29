@@ -9,6 +9,15 @@ import java.util.HashSet;
 public class ScrabbleDictionary {
 	private HashSet<String> set;
 
+	public static ScrabbleDictionary getInstance() {
+		if (singleton == null) {
+			singleton = new ScrabbleDictionary();
+		}
+		return singleton;
+	}
+
+	private static ScrabbleDictionary singleton;
+
 	public ScrabbleDictionary() {
 		try {
 			BufferedReader input = new BufferedReader(new FileReader("US.dic"));
