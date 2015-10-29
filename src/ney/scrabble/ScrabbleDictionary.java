@@ -18,7 +18,7 @@ public class ScrabbleDictionary {
 
 	private static ScrabbleDictionary singleton;
 
-	public ScrabbleDictionary() {
+	private ScrabbleDictionary() {
 		try {
 			BufferedReader input = new BufferedReader(new FileReader("US.dic"));
 			set = new HashSet<String>();
