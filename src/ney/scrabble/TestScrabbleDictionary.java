@@ -7,7 +7,7 @@ public class TestScrabbleDictionary {
 
 	@Test
 	public void testContains() {
-		ScrabbleDictionary sc = new ScrabbleDictionary();
+		ScrabbleDictionary sc = ScrabbleDictionary.getInstance();
 		boolean word = sc.contains("data");
 
 		Assert.assertTrue(word);
