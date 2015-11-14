@@ -10,14 +10,13 @@ import java.util.Set;
 public class UPSDatabase {
 	HashMap<Package, Location> packMap = new HashMap<Package, Location>();
 	HashMap<Location, HashSet<Package>> locationSets = new HashMap<>();
-	HashSet<Package> pkgSet = new HashSet<>();
 
 	/**
 	 * Add a package to the specified Location
 	 */
 	public void addPackageToLocation(Location location, Package pkg) {
 		packMap.put(pkg, location);
-
+		HashSet<Package> pkgSet = new HashSet<>();
 		if (locationSets.containsKey(location)) {
 			pkgSet = locationSets.get(location);
 			pkgSet.add(pkg);
@@ -34,7 +33,7 @@ public class UPSDatabase {
 	public void updatePackageLocation(Package pkg, Location location) {
 		locationSets.get(packMap.get(pkg)).remove(pkg);
 		packMap.replace(pkg, location);
-
+		HashSet<Package> pkgSet = new HashSet<>();
 		if (locationSets.containsKey(location)) {
 			pkgSet = locationSets.get(location);
 			pkgSet.add(pkg);
