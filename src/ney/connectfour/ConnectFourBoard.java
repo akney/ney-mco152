@@ -128,14 +128,14 @@ public class ConnectFourBoard {
 		} // end outer for
 
 		counter = 0;
-		for (int i = 5; i > -1; i--) {
+		for (int i = 5; i > -1; i--) { // diagnol the other way
 			for (int j = 6; i > -1; i--) {
 				if (board[i][j] == player) {
 					counter++;
 					boolean counterPlussed;
 					do {
 						if (i - counter > -1 && j - counter > -1) {
-							if (board[i][j] == board[i + counter][j + counter]) {
+							if (board[i][j] == board[i - counter][j - counter]) {
 								counter++;
 								counterPlussed = true;
 							} else {
@@ -154,7 +154,7 @@ public class ConnectFourBoard {
 					} while (counterPlussed);
 				}
 			}
-		}
+		} /**/
 
 		return false;
 	}
