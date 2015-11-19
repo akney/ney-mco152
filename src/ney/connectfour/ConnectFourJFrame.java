@@ -66,7 +66,8 @@ public class ConnectFourJFrame extends JFrame {
 																	// component
 																	// that
 																	// color
-						if (board.winner(player)) { // checking for a winner
+						if (board.winner(player, row, col)) { // checking for a
+																// winner
 							if (player == 'r') {
 								statistics.put("Red", statistics.get("Red") + 1);
 								JOptionPane.showMessageDialog(null, "Red Wins!");
