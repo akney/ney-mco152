@@ -87,10 +87,11 @@ public class ConnectFourJFrame extends JFrame {
 							showStatistics();
 							restart();
 						}
-						player = player == 'r' ? 'b' : 'r'; // change the player
-															// for the next turn
-					}
-				}
+
+					} // end if
+					player = player == 'r' ? 'b' : 'r'; // change the player
+														// for the next turn
+				}// action performed
 			});
 			add(buttons[i]);
 		}

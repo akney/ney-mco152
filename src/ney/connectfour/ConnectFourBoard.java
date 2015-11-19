@@ -122,29 +122,14 @@ public class ConnectFourBoard {
 			j++;
 		}
 
-		// check diagnol to the left -note both diagnols will be flipped in the
-		// gui
-		i = row;
-		j = col;
-		counter = 0;
-		while (i < 5 && j > 0) {
-			i++;
-			j--;
-		}
-
-		while (i > 0 && j < 6) {
-			if (board[i][j] == player) {
-				counter++;
-			} else {
-				counter = 0;
-
+		// check diagnol to the left -note both diagnols will be flipped in
+		for (i = 3; i < board.length; i++) {
+			for (j = 0; j < board[0].length - 3; j++) {
+				if (board[i][j] == player && board[i][j] == board[i - 1][j + 1]
+						&& board[i - 1][j + 1] == board[i - 2][j + 2] && board[i - 2][j + 2] == board[i - 3][j + 3]) {
+					return true;
+				}
 			}
-
-			if (counter == 4) {
-				return true;
-			}
-			i--;
-			j++;
 		}
 
 		return false;
