@@ -33,7 +33,7 @@ public class ConnectFourComponent extends JComponent {
 
 	}
 
-	public void changeColor(char player) {
+	public void changeColor(Character player) {
 		this.player = player;
 	}
 

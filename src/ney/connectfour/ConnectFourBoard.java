@@ -7,7 +7,7 @@ public class ConnectFourBoard {
 
 	public ConnectFourBoard() {
 		board = new char[6][7];
-		howFullIsColumn = new int[6];
+		howFullIsColumn = new int[7];
 	}
 
 	/**
@@ -67,17 +67,14 @@ public class ConnectFourBoard {
 	 * 
 	 * @return true if there is a winner
 	 */
-	public boolean winner() {
-		int counter = 1;
+	public boolean winner(char player) {
+		int counter = 0;
 		for (int i = 0; i < 6; i++) { // checks for row
-			counter = 1;
-			char first = board[i][0];
 			for (int j = 1; j < 7; j++) {
-				if (first == board[i][j]) {
+				if (board[i][j] == player) {
 					counter++;
 				} else {
-					first = board[i][j];
-					counter = 1;
+					counter = 0;
 				}
 
 				if (counter == 4) {
@@ -86,93 +83,76 @@ public class ConnectFourBoard {
 			} // inner for
 		} // outer for
 
+		counter = 0; // resetting the counter
 		for (int j = 0; j < 7; j++) { // checks for column
-			counter = 1;
-			if (howFullIsColumn[j] < 3) {
-				break;
-			}
-			char first = board[0][j];
-			for (int i = 0; i < 6; i++) {
-				if (first == board[i][j]) {
-					counter++;
-				} else {
-					first = board[i][j];
-					counter = 1;
-				}
-
-				if (counter == 4) {
-					return true;
-				}
-			} // inner for
-		} // outer for
-
-		for (int i = 0; i < 6; i++) { // diagnol up to the left
-			if (board[i][0] != 'r' || board[i][0] != 'b') {
-				break;
-			}
-
-			for (int j = 0; j < 7; j++) {
-				char first = board[i][j];
-				char next;
-				counter = 1;
-				boolean counterPlussed;
-				do {
-					if (i + counter < 6 && j + counter < 7) {
-						next = board[i + counter][j + counter];
-
-						if (next == first) {
-							counter++;
-							counterPlussed = true;
-						} // end inner if
-						else {
-							counterPlussed = false;
-						}
-
-						if (counter == 4) {
-
-							return true;
-						} // end inner if
-					} // end outer if
-					else {
-						counterPlussed = false;
+			if (howFullIsColumn[j] > 3) {
+				for (int i = 0; i < 6; i++) {
+					if (board[i][j] == player) {
+						counter++;
+					} else {
+						counter = 0;
 					}
-				} while (counterPlussed);
+					if (counter == 4) {
+						return true;
 
+					}
+				}
 			}
 		}
-
-		for (int i = 0; i < 6; i++) { // diagnol up to the right
-			if (board[i][0] != 'r' || board[i][0] != 'b') {
-				break;
-			}
-
+		counter = 0;
+		for (int i = 0; i < 6; i++) { // diagnol up one way
 			for (int j = 0; j < 7; j++) {
-				char first = board[i][j];
-				char next;
-				counter = 1;
-				boolean counterPlussed;
-				do {
-					if (i - counter < 6 && j - counter < 7) {
-						next = board[i - counter][j - counter];
-
-						if (next == first) {
-							counter++;
-							counterPlussed = true;
-						} // end inner if
-						else {
+				if (board[i][j] == player) {
+					counter++;
+					boolean counterPlussed;
+					do {
+						if (i + counter < 6 && j + counter < 7) {
+							if (board[i][j] == board[i + counter][j + counter]) {
+								counter++;
+								counterPlussed = true;
+							} else {
+								counter = 0;
+								counterPlussed = false;
+							}
+						} else {
+							counter = 0;
 							counterPlussed = false;
-						}
+						} // end if else
 
 						if (counter == 4) {
-
 							return true;
-						} // end inner if
-					} // end outer if
-					else {
-						counterPlussed = false;
-					}
-				} while (counterPlussed);
+						} // end if
+					} while (counterPlussed); // end do while
+				} // end if
+			} // end inner for
+		} // end outer for
 
+		counter = 0;
+		for (int i = 5; i > -1; i--) {
+			for (int j = 6; i > -1; i--) {
+				if (board[i][j] == player) {
+					counter++;
+					boolean counterPlussed;
+					do {
+						if (i - counter > -1 && j - counter > -1) {
+							if (board[i][j] == board[i + counter][j + counter]) {
+								counter++;
+								counterPlussed = true;
+							} else {
+								counter = 0;
+								counterPlussed = false;
+							}
+						} else {
+							counter = 0;
+							counterPlussed = false;
+						} // end if else
+
+						if (counter == 4) {
+							return true;
+						} // end if
+
+					} while (counterPlussed);
+				}
 			}
 		}
 
