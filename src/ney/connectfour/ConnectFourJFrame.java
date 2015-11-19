@@ -58,6 +58,7 @@ public class ConnectFourJFrame extends JFrame {
 														// and returns the row
 
 					if (row != -1) {
+						boolean restarted = false;
 
 						holder[5 - row][col].changeColor(player); // based on
 																	// the row,
@@ -73,11 +74,13 @@ public class ConnectFourJFrame extends JFrame {
 								JOptionPane.showMessageDialog(null, "Red Wins!");
 								showStatistics();
 								restart();
+								restarted = true;
 							} else {
 								statistics.put("Blue", statistics.get("Blue") + 1);
 								JOptionPane.showMessageDialog(null, "Blue Wins!");
 								showStatistics();
 								restart();
+								restarted = true;
 							}
 
 						}
@@ -86,11 +89,15 @@ public class ConnectFourJFrame extends JFrame {
 							JOptionPane.showMessageDialog(null, "No one wins.");
 							showStatistics();
 							restart();
+							restarted = true;
 						}
+						if (!restarted) {
+							player = player == 'r' ? 'b' : 'r'; // change the
+																// player
+							// for the next turn
+						}
+					} // end if row != -1
 
-					} // end if
-					player = player == 'r' ? 'b' : 'r'; // change the player
-														// for the next turn
 				}// action performed
 			});
 			add(buttons[i]);
