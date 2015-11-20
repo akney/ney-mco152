@@ -39,12 +39,7 @@ public class ConnectFourBoard {
 	 * @return boolean - true if full, false if not full
 	 */
 	private boolean fullColumn(int col) {
-		if (howFullIsColumn[col] == 6) {
-			return true;
-		} else {
-			return false;
-		}
-
+		return howFullIsColumn[col] == 6;
 	}
 
 	/**

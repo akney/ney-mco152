@@ -29,12 +29,11 @@ public class ConnectFourComponent extends JComponent {
 			g.fillOval(20, 20, 60, 60);
 		}
 
-		super.repaint();
-
 	}
 
 	public void changeColor(Character player) {
 		this.player = player;
+		super.repaint();
 	}
 
 }

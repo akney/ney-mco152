@@ -185,7 +185,4 @@ public class ConnectFourJFrame extends JFrame {
 		board = new ConnectFourBoard();
 	}
 
-	public void end() {
-		dispose();
-	}
 }
