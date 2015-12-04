@@ -1,16 +1,20 @@
-package ney.internet;
+package ney.weather;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpURLConnectionDemo {
+import com.google.gson.Gson;
 
-	public static void main(String[] args) throws IOException {
+import ney.ufo.UFOList;
 
+public class ConnectToInternet {
+
+	public ConnectToInternet() throws IOException {
 		URL url = new URL(
 				"http://api.openweathermap.org/data/2.5/weather?zip=11415,us&appid=2de143494c0b295cca9337e1e96b00e0");
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -21,9 +25,15 @@ public class HttpURLConnectionDemo {
 		String s;
 		while ((s = bf.readLine()) != null) {
 
-			System.out.println(s);
 		}
 
+		BufferedReader in = new BufferedReader(new FileReader("./ufo_awesome.json"));
+
+		Gson gson = new Gson();
+
+		UFOList list = gson.fromJson(in, UFOList.class);
+
+		in.close();
 	}
 
 }
