@@ -10,6 +10,8 @@ import java.net.UnknownHostException;
 
 public class SocketHttpRequestDemo {
 
+	// bare minumum in internet communications
+
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		Socket sock = new Socket("www.google.com", 80);
 
