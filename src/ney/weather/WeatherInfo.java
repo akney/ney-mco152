@@ -7,32 +7,30 @@ public class WeatherInfo {
 	private String name;
 
 	class Weather {
-		private int wdid;
-		private String main;
+
 		private String description;
 		private String icon;
 
-		Weather(int wdid, String main, String description, String icon) {
-			this.wdid = wdid;
-			this.main = main;
-			this.description = description;
-			this.icon = icon;
+		Weather() {
+
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public String getIconId() {
+			return icon;
 		}
 	}// end weather descriptions
 
 	class Main {
 		private double temp;
-		private double pressure;
 		private double humidity;
 		private double temp_min;
 		private double temp_max;
 
-		Main(double temp, double pressure, double humidity, double temp_min, double temp_max) {
-			this.temp = temp;
-			this.pressure = pressure;
-			this.humidity = humidity;
-			this.temp_min = temp_min;
-			this.temp_max = temp_max;
+		Main() {
 
 		}
 
@@ -41,10 +39,10 @@ public class WeatherInfo {
 		}
 	} // end MAin
 
-	public WeatherInfo(Weather[] weather, Main main, String name) {
-		this.array = weather;
-		this.main = main;
-		this.name = name;
+	public WeatherInfo() {
+		array = new Weather[1];
+		main = new Main();
+		name = new String();
 	}
 
 	public Weather[] getWeather() {

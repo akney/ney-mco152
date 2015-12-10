@@ -5,9 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 import com.google.gson.Gson;
+
+import ney.weather.WeatherInfo.Weather;
 
 public class ConnectToInternet {
 	private WeatherInfo info;
@@ -36,8 +42,29 @@ public class ConnectToInternet {
 		return info.getName();
 	}
 
-	public double getTemp() {
-		return info.getTemp();
+	public double getTempF() {
+
+		return info.getTemp() * 9 / 5 - 459.67;
+	}
+
+	public String getDescription() {
+		Weather[] array = info.getWeather();
+		return array[0].getDescription();
+	}
+
+	private String getIconId() {
+		Weather[] array = info.getWeather();
+		return array[0].getIconId();
+	}
+
+	public Icon getIcon() throws MalformedURLException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("http://openweathermap.org/img/w/");
+		sb.append(getIconId());
+		sb.append(".png");
+		ImageIcon icon = new ImageIcon(new URL(sb.toString()));
+
+		return icon;
 	}
 
 }

@@ -3,8 +3,8 @@ package ney.weather;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.BoxLayout;
@@ -31,61 +31,68 @@ public class WeatherGui extends JFrame {
 
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
+		// top panel
 		top = new JPanel();
-		top.setBackground(Color.BLUE);
 		top.setLayout(new BoxLayout(top, BoxLayout.LINE_AXIS));
-
-		middle = new JPanel();
-		middle.setBackground(Color.BLUE);
-		middle.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 40));
-
-		bottom = new JPanel();
-		bottom.setBackground(Color.BLUE);
-		bottom.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 40));
-
-		temp = new JLabel("Tempature");
-		temp.setFont(new Font("Courier New", Font.BOLD, 28));
-		middle.add(temp);
+		top.setAlignmentX(TOP_ALIGNMENT);
+		top.setBackground(Color.GRAY);
 
 		zip = new JLabel("Zipcode: ");
 		zip.setAlignmentX(CENTER_ALIGNMENT);
 		zip.setFont(new Font("Courier New", Font.BOLD, 28));
 
-		zipEntry = new JTextField(10);
-		zipEntry.addKeyListener(new KeyListener() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				all(e);
+		notZipcode = new JLabel();
+		zip.setFont(new Font("Courier New", Font.BOLD, 28));
 
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				all(e);
-			}
+		zipEntry = new JTextField();
+		zipEntry.setColumns(5);
+		zipEntry.addActionListener(new ActionListener() {
 
 			@Override
-			public void keyTyped(KeyEvent e) {
-				all(e);
-			}
+			public void actionPerformed(ActionEvent arg0) {
+				ConnectToInternet cti;
+				try {
+					cti = new ConnectToInternet(zipEntry.getText());
+					temp.setText("Tempature");
+					Integer tem = (int) cti.getTempF();
+					char degree = 176;
+					tempNum.setText(tem.toString() + degree);
 
-			public void all(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					try {
-						ConnectToInternet cti = new ConnectToInternet(zipEntry.getText());
+					description.setText(cti.getDescription());
 
-					} catch (IOException e1) {
-						notZipcode = new JLabel("Not a valid zipcode.");
-						notZipcode.setFont(new Font("Courier New", Font.BOLD, 28));
-						top.add(notZipcode);
-					}
+				} catch (IOException e) {
+					notZipcode.setText("Invalid Zipcode");
 				}
+
 			}
+
 		});
+
 		top.add(zip);
 		top.add(zipEntry);
+		top.add(notZipcode);
+
+		// middle panel
+		middle = new JPanel();
+		middle.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 40));
+
+		temp = new JLabel();
+		temp.setFont(new Font("Courier New", Font.BOLD, 28));
+		middle.add(temp);
+		description = new JLabel();
+		description.setFont(new Font("Courier New", Font.BOLD, 28));
+		middle.add(description);
+
+		bottom = new JPanel();
+		bottom.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 40));
+
+		tempNum = new JLabel();
+		tempNum.setFont(new Font("Courier New", Font.BOLD, 28));
+		bottom.add(tempNum);
+
 		add(top);
 		add(middle);
+		add(bottom);
 
 	}
 
