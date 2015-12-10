@@ -35,6 +35,10 @@ public class ConnectToInternet {
 
 		in.close();
 
+		if (info.getCod().equals("404")) {
+			throw new NullPointerException();
+		}
+
 	}
 
 	public String getName() {

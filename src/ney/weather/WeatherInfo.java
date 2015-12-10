@@ -5,6 +5,11 @@ public class WeatherInfo {
 	private Weather[] weather;
 	private Main main;
 	private String name;
+	private String cod;
+
+	public String getCod() {
+		return cod;
+	}
 
 	class Weather {
 
@@ -43,6 +48,7 @@ public class WeatherInfo {
 		weather = new Weather[1];
 		main = new Main();
 		name = new String();
+		cod = new String();
 	}
 
 	public Weather[] getWeather() {

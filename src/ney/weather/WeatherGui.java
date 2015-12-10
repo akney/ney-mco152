@@ -44,7 +44,7 @@ public class WeatherGui extends JFrame {
 		zip.setFont(new Font("Courier New", Font.BOLD, 28));
 
 		notZipcode = new JLabel();
-		zip.setFont(new Font("Courier New", Font.BOLD, 28));
+		notZipcode.setFont(new Font("Courier New", Font.BOLD, 28));
 
 		zipEntry = new JTextField();
 		zipEntry.setColumns(5);
