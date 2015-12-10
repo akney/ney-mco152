@@ -12,4 +12,9 @@ public class ConnectToInternetTest {
 		ConnectToInternet cti = new ConnectToInternet("11415");
 		Assert.assertEquals("Queens County", cti.getName());
 	}
+
+	@Test
+	public void testGetDescription() throws IOException {
+		ConnectToInternet cti = new ConnectToInternet("11415");
+	}
 }

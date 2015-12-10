@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,6 +24,8 @@ public class WeatherGui extends JFrame {
 	private JLabel temp;
 	private JLabel tempNum;
 	private JLabel description;
+	private ImageIcon ii;
+	private JLabel icon;
 
 	public WeatherGui() {
 		setTitle("Weather");
@@ -57,7 +60,7 @@ public class WeatherGui extends JFrame {
 					Integer tem = (int) cti.getTempF();
 					char degree = 176;
 					tempNum.setText(tem.toString() + degree);
-
+					ii = (ImageIcon) cti.getIcon();
 					description.setText(cti.getDescription());
 
 				} catch (IOException e) {
@@ -83,12 +86,16 @@ public class WeatherGui extends JFrame {
 		description.setFont(new Font("Courier New", Font.BOLD, 28));
 		middle.add(description);
 
+		// bottom panel
 		bottom = new JPanel();
 		bottom.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 40));
 
 		tempNum = new JLabel();
 		tempNum.setFont(new Font("Courier New", Font.BOLD, 28));
 		bottom.add(tempNum);
+		ii = new ImageIcon();
+		icon = new JLabel(ii);
+		bottom.add(icon);
 
 		add(top);
 		add(middle);
