@@ -1,15 +1,14 @@
 package ney.weather;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 import com.google.gson.Gson;
 
@@ -57,12 +56,12 @@ public class ConnectToInternet {
 		return array[0].getIconId();
 	}
 
-	public Icon getIcon() throws MalformedURLException {
+	public BufferedImage getIcon() throws IOException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("http://openweathermap.org/img/w/");
 		sb.append(getIconId());
 		sb.append(".png");
-		ImageIcon icon = new ImageIcon(new URL(sb.toString()));
+		BufferedImage icon = ImageIO.read(new URL(sb.toString()));
 
 		return icon;
 	}

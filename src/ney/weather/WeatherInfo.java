@@ -2,7 +2,7 @@ package ney.weather;
 
 public class WeatherInfo {
 
-	private Weather[] array;
+	private Weather[] weather;
 	private Main main;
 	private String name;
 
@@ -40,13 +40,13 @@ public class WeatherInfo {
 	} // end MAin
 
 	public WeatherInfo() {
-		array = new Weather[1];
+		weather = new Weather[1];
 		main = new Main();
 		name = new String();
 	}
 
 	public Weather[] getWeather() {
-		return array;
+		return weather;
 	}
 
 	public double getTemp() {

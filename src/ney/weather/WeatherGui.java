@@ -24,7 +24,6 @@ public class WeatherGui extends JFrame {
 	private JLabel temp;
 	private JLabel tempNum;
 	private JLabel description;
-	private ImageIcon ii;
 	private JLabel icon;
 
 	public WeatherGui() {
@@ -54,16 +53,19 @@ public class WeatherGui extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ConnectToInternet cti;
+
 				try {
 					cti = new ConnectToInternet(zipEntry.getText());
 					temp.setText("Tempature");
 					Integer tem = (int) cti.getTempF();
 					char degree = 176;
 					tempNum.setText(tem.toString() + degree);
-					ii = (ImageIcon) cti.getIcon();
+					icon.setIcon(new ImageIcon(cti.getIcon()));
 					description.setText(cti.getDescription());
 
 				} catch (IOException e) {
+					notZipcode.setText("Invalid Zipcode");
+				} catch (NullPointerException e) {
 					notZipcode.setText("Invalid Zipcode");
 				}
 
@@ -92,9 +94,8 @@ public class WeatherGui extends JFrame {
 
 		tempNum = new JLabel();
 		tempNum.setFont(new Font("Courier New", Font.BOLD, 28));
+		icon = new JLabel();
 		bottom.add(tempNum);
-		ii = new ImageIcon();
-		icon = new JLabel(ii);
 		bottom.add(icon);
 
 		add(top);
