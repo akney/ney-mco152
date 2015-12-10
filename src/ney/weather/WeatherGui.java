@@ -55,7 +55,9 @@ public class WeatherGui extends JFrame {
 				ConnectToInternet cti;
 
 				try {
+
 					cti = new ConnectToInternet(zipEntry.getText());
+					notZipcode.setText(cti.getName());
 					temp.setText("Tempature");
 					Integer tem = (int) cti.getTempF();
 					char degree = 176;
