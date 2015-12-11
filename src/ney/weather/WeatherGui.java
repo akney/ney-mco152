@@ -5,10 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -52,7 +50,8 @@ public class WeatherGui extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			 WeatherThread thread = new WeatherThread(temp, notZipcode, tempNum, icon);
+				WeatherThread thread = new WeatherThread(zipEntry, temp, notZipcode, tempNum, icon, description);
+				thread.run();
 			}
 
 		});
