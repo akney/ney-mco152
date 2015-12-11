@@ -52,25 +52,7 @@ public class WeatherGui extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ConnectToInternet cti;
-
-				try {
-
-					cti = new ConnectToInternet(zipEntry.getText());
-					notZipcode.setText(cti.getName());
-					temp.setText("Tempature");
-					Integer tem = (int) cti.getTempF();
-					char degree = 176;
-					tempNum.setText(tem.toString() + degree);
-					icon.setIcon(new ImageIcon(cti.getIcon()));
-					description.setText(cti.getDescription());
-
-				} catch (IOException e) {
-					notZipcode.setText("Invalid Zipcode");
-				} catch (NullPointerException e) {
-					notZipcode.setText("Invalid Zipcode");
-				}
-
+			 WeatherThread thread = new WeatherThread(temp, notZipcode, tempNum, icon);
 			}
 
 		});
