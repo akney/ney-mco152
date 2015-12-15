@@ -2,6 +2,7 @@ package ney.airline;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * This class is part of an Airline Reservation system. It holds seats that are
@@ -9,9 +10,10 @@ import java.util.HashMap;
  * methods.
  */
 public class AirplaneSeats {
-	HashMap<String, Boolean> seats;
+	HashMap<Character, HashSet<Integer>> seats;
 	int rows;
 	int columns;
+	char highestCol;
 
 	/**
 	 * @param rows
@@ -20,7 +22,10 @@ public class AirplaneSeats {
 	 *            the number of columns of seats on the plane.
 	 */
 	public AirplaneSeats(int rows, int columns) {
-		seats = new HashMap<String, Boolean>();
+		seats = new HashMap<Character, HashSet<Integer>>();
+		this.rows = rows;
+		this.columns = columns;
+		highestCol = (char) (columns + 64);
 	}
 
 	/**
@@ -34,6 +39,23 @@ public class AirplaneSeats {
 	 *             constructor
 	 */
 	public void reserve(String seatName) throws AlreadyReservedException, SeatOutOfBoundsException {
+		char letter = seatName.charAt(0);
+		int number = Character.getNumericValue(seatName.charAt(1));
+		if (isReserved(seatName)) {
+			throw new AlreadyReservedException();
+		} else if (letter > highestCol || number > columns) {
+			throw new SeatOutOfBoundsException();
+		} else {
+			HashSet<Integer> nums = new HashSet<Integer>();
+			if (seats.containsKey(letter)) {
+				nums = seats.get(letter);
+				nums.add(number);
+				seats.replace(letter, nums);
+			} else {
+				nums.add(number);
+				seats.put(seatName.charAt(0), nums);
+			}
+		}
 
 	}
 
@@ -44,7 +66,9 @@ public class AirplaneSeats {
 	 * @return true if the seat has been reserved, otherwise false.
 	 */
 	public boolean isReserved(String seatName) {
-		return false;
+		char letter = seatName.charAt(0);
+		int number = Character.getNumericValue(seatName.charAt(1));
+		return seats.containsKey(letter) && seats.get(letter).contains(number);
 
 	}
 
@@ -62,6 +86,9 @@ public class AirplaneSeats {
 	 */
 	public void reserveAll(String... seatNames) throws AlreadyReservedException, SeatOutOfBoundsException {
 
+		for (String seatName : seatNames) {
+			reserve(seatName);
+		}
 	}
 
 	/**
@@ -94,7 +121,9 @@ public class AirplaneSeats {
 	 *             if there are not enough seats together to reserve.
 	 */
 	public ArrayList<String> reserveGroup(int numberOfSeatsTogether) throws NotEnoughSeatsException {
-
+		if (isPlaneFull()) {
+			throw new NotEnoughSeatsException();
+		}
 	}
 
 	/**
@@ -102,7 +131,7 @@ public class AirplaneSeats {
 	 */
 	public boolean isPlaneFull() {
 
-		return true;
+		return seats.size() == rows * columns;
 
 	}
 
