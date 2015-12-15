@@ -3,6 +3,7 @@ package ney.airline;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * This class is part of an Airline Reservation system. It holds seats that are
@@ -10,7 +11,7 @@ import java.util.HashSet;
  * methods.
  */
 public class AirplaneSeats {
-	HashMap<Character, HashSet<Integer>> seats;
+	HashMap<Integer, HashSet<Character>> seats;
 	int rows;
 	int columns;
 	char highestCol;
@@ -22,7 +23,7 @@ public class AirplaneSeats {
 	 *            the number of columns of seats on the plane.
 	 */
 	public AirplaneSeats(int rows, int columns) {
-		seats = new HashMap<Character, HashSet<Integer>>();
+		seats = new HashMap<Integer, HashSet<Character>>();
 		this.rows = rows;
 		this.columns = columns;
 		highestCol = (char) (columns + 64);
@@ -46,14 +47,14 @@ public class AirplaneSeats {
 		} else if (letter > highestCol || number > columns) {
 			throw new SeatOutOfBoundsException();
 		} else {
-			HashSet<Integer> nums = new HashSet<Integer>();
-			if (seats.containsKey(letter)) {
-				nums = seats.get(letter);
-				nums.add(number);
-				seats.replace(letter, nums);
+			HashSet<Character> letters = new HashSet<Character>();
+			if (seats.containsKey(number)) {
+				letters = seats.get(number);
+				letters.add(letter);
+				seats.replace(number, letters);
 			} else {
-				nums.add(number);
-				seats.put(seatName.charAt(0), nums);
+				letters.add(letter);
+				seats.put(number, letters);
 			}
 		}
 
@@ -121,8 +122,14 @@ public class AirplaneSeats {
 	 *             if there are not enough seats together to reserve.
 	 */
 	public ArrayList<String> reserveGroup(int numberOfSeatsTogether) throws NotEnoughSeatsException {
-		if (isPlaneFull()) {
+		if (numberOfSeatsTogether > columns) {
 			throw new NotEnoughSeatsException();
+		} else if (isPlaneFull()) {
+			throw new NotEnoughSeatsException();
+		} else {
+			for (int i = 0; i < rows; i++) {
+
+			}
 		}
 	}
 
@@ -130,8 +137,17 @@ public class AirplaneSeats {
 	 * @return true if the plane is full, otherwise false.
 	 */
 	public boolean isPlaneFull() {
+		if (seats.size() < rows) {
+			return false;
+		}
 
-		return seats.size() == rows * columns;
+		for (Map.Entry<Integer, HashSet<Character>> entry : seats.entrySet()) {
+			if (entry.getValue().size() < columns) {
+				return false;
+			}
+		}
+
+		return true;
 
 	}
 
