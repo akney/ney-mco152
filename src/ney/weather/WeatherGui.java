@@ -49,7 +49,7 @@ public class WeatherGui extends JFrame {
 		zipEntry.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				WeatherThread thread = new WeatherThread(zipEntry, temp, notZipcode, tempNum, icon, description);
 				thread.start();
 			}
