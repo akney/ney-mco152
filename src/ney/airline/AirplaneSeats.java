@@ -120,17 +120,34 @@ public class AirplaneSeats {
 	 * @return an ArrayList of seatNames of the seats that have been reserved.
 	 * @throws NotEnoughSeatsException
 	 *             if there are not enough seats together to reserve.
+	 * @throws SeatOutOfBoundsException
+	 * @throws AlreadyReservedException
 	 */
-	public ArrayList<String> reserveGroup(int numberOfSeatsTogether) throws NotEnoughSeatsException {
+	public ArrayList<String> reserveGroup(int numberOfSeatsTogether)
+			throws NotEnoughSeatsException, AlreadyReservedException, SeatOutOfBoundsException {
+		ArrayList<String> group = new ArrayList<String>();
 		if (numberOfSeatsTogether > columns) {
 			throw new NotEnoughSeatsException();
 		} else if (isPlaneFull()) {
 			throw new NotEnoughSeatsException();
 		} else {
-			for (int i = 0; i < rows; i++) {
+			for (Integer i = 0; i < rows; i++) {
+				if (!seats.containsKey(i)) {
+					for (int j = 1; j < numberOfSeatsTogether; j++) {
+						String seat = i.toString() + (char) (j + 64);
+						reserve(seat);
+						group.add(seat);
+					}
+					return group;
+				} else if (seats.get(i).size() > columns - numberOfSeatsTogether) {
+					break;
+				} else {
 
+				}
 			}
+
 		}
+		return null;
 	}
 
 	/**
