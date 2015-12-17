@@ -43,7 +43,7 @@ public class SixteenDayForecast {
 		}
 
 		public double getHumidity() {
-			return humidity;
+			return humidity * 9 / 5 - 459.67;
 		}
 
 		public Weather getWeather() {
@@ -60,7 +60,7 @@ public class SixteenDayForecast {
 		}
 
 		public double getDayTemp() {
-			return day;
+			return day * 9 / 5 - 459.67;
 		}
 
 	}

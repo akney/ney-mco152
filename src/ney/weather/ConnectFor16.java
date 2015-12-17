@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -44,7 +45,7 @@ public class ConnectFor16 {
 		return six.getList()[position];
 	}
 
-	public BufferedImage getImage(int position) {
+	public BufferedImage getImage(int position) throws MalformedURLException, IOException {
 		String iconPath = "http://openweathermap.org/img/w/" + six.getList()[position].getWeather().getIconId()
 				+ ".png";
 		BufferedImage icon = ImageIO.read(new URL(iconPath));

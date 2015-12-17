@@ -51,7 +51,7 @@ public class WeatherGui extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				WeatherThread thread = new WeatherThread(zipEntry, temp, notZipcode, tempNum, icon, description);
-				thread.run();
+				thread.start();
 			}
 
 		});
