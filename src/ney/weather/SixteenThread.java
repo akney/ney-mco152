@@ -2,6 +2,7 @@ package ney.weather;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -39,7 +40,8 @@ public class SixteenThread extends Thread {
 			six = new ConnectFor16(city);
 			weatherToday = six.getListObject(dayUpto);
 
-			day.setText(format.format(weatherToday.getDt()));
+			Date date = new Date(weatherToday.getDt());
+			day.setText(format.format(date));
 
 			image.setIcon(new ImageIcon(six.getImage(dayUpto)));
 

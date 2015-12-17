@@ -12,6 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class SixteenDayForecastGui extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel top;
 	private JLabel city;
 	private JTextField cityEntry;
@@ -22,23 +26,25 @@ public class SixteenDayForecastGui extends JFrame {
 	private JPanel bottom;
 
 	public SixteenDayForecastGui() {
-		setTitle("Connect Four");
+		setTitle("Sixteen Day Forecast");
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
 		// setting up the top pane
 		top = new JPanel();
 		top.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
 		top.setSize(200, 600);
 		city = new JLabel("City:");
-		cityEntry = new JTextField("Enter the city name here...");
+		cityEntry = new JTextField(20);
 		cityEntry.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				JPanel dayOfWeather = null;
 				for (int i = 0; i < 16; i++) {
 					String city = cityEntry.getText();
-					JPanel dayOfWeather = new JPanel();
+					dayOfWeather = new JPanel();
 
 					dayOfWeather.setLayout(new BoxLayout(dayOfWeather, BoxLayout.Y_AXIS));
 					JLabel day = new JLabel();
@@ -48,13 +54,15 @@ public class SixteenDayForecastGui extends JFrame {
 					JLabel humidity = new JLabel();
 					SixteenThread thread = new SixteenThread(i, day, image, tempature, description, humidity, city,
 							invalid);
+					thread.start();
 					dayOfWeather.add(day);
 					dayOfWeather.add(image);
 					dayOfWeather.add(tempature);
 					dayOfWeather.add(description);
 					dayOfWeather.add(humidity);
-					bottom.add(dayOfWeather);
+
 				}
+				bottom.add(dayOfWeather);
 
 			}
 		});
@@ -79,9 +87,3 @@ public class SixteenDayForecastGui extends JFrame {
 	}
 
 }
-
-/*
- * JLabel day = new JLabel(); JLabel image = new JLabel(); JLabel tempature =
- * new JLabel(); JLabel description = new JLabel(); JLabel humidity = new
- * JLabel();
- */

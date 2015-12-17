@@ -1,15 +1,8 @@
 package ney.weather;
 
-import java.util.Date;
-
 public class SixteenDayForecast {
 	private String cod;
 	private List[] list;
-
-	public SixteenDayForecast() {
-		cod = new String();
-		list = new List[16];
-	}
 
 	public String getCod() {
 		return cod;
@@ -25,17 +18,17 @@ public class SixteenDayForecast {
 
 	class List {
 
-		private Date dt;
+		private long dt;
 		private Temp temp;
 		double humidity;
-		private Weather weather;
+		private Weather[] weather;
 
 		public List() {
 
 		}
 
-		public Date getDt() {
-			return dt;
+		public long getDt() {
+			return dt * 1000;
 		}
 
 		public Temp getTemp() {
@@ -47,7 +40,7 @@ public class SixteenDayForecast {
 		}
 
 		public Weather getWeather() {
-			return weather;
+			return weather[0];
 		}
 
 	}
