@@ -11,7 +11,7 @@ public class SixteenDayForecast {
 	public List[] getList() {
 		List[] copy = new List[16];
 		for (int i = 0; i < 16; i++) {
-			copy[i] = list[i];
+
 		}
 		return copy;
 	}
