@@ -1,9 +1,11 @@
 package ney.contacts;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
 
 public class ContactFrame extends JFrame {
 	private ContactArrayList contacts;
@@ -20,13 +22,24 @@ public class ContactFrame extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
 
-		list.addMouseListener(new ListSelectionListener() {
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList) evt.getSource();
+				if (evt.getClickCount() == 2) {
+					int index = list.locationToIndex(evt.getPoint());
+				}
+			}
 		});
 
 		ContactThread thread = new ContactThread(contacts, names, list);
 		thread.start();
 
 		add(list);
+
+	}
+
+	public JFrame contactInfo() {
 
 	}
 
