@@ -34,9 +34,24 @@ public class ContactThread extends Thread {
 
 				@Override
 				public int compare(String a, String b) {
-					int lastSpacea = a.lastIndexOf(" ");
-					int lastSpaceb = b.lastIndexOf(" ");
-					return a.substring(lastSpacea + 1).compareTo(b.substring(lastSpaceb + 1));
+					String[] arraya = a.split(" ");
+					String[] arrayb = b.split(" ");
+					String aLast;
+					String bLast;
+
+					if (arraya[arraya.length - 1].matches("[IVX]*") || arraya[arraya.length - 1].equals("Jr")
+							|| arraya[arraya.length - 1].equals("Sr")) {
+						aLast = arraya[arraya.length - 2];
+					} else {
+						aLast = arraya[arraya.length - 1];
+					}
+					if (arrayb[arrayb.length - 1].matches("[IVX]*") || arrayb[arrayb.length - 1].equals("Jr")
+							|| arrayb[arrayb.length - 1].equals("Sr")) {
+						bLast = arrayb[arrayb.length - 2];
+					} else {
+						bLast = arrayb[arrayb.length - 1];
+					}
+					return aLast.compareTo(bLast);
 				}
 
 			});
