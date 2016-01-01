@@ -1,6 +1,6 @@
 package ney.contacts;
 
-public class Contact {
+public class Contact implements Comparable<Contact> {
 
 	private String name;
 	private String email;
@@ -21,6 +21,30 @@ public class Contact {
 
 	public String getPhone() {
 		return phone;
+	}
+
+	@Override
+	public int compareTo(Contact contact) {
+		String a = this.getName();
+		String b = contact.getName();
+		String[] arraya = a.split(" ");
+		String[] arrayb = b.split(" ");
+		String aLast;
+		String bLast;
+
+		if (arraya[arraya.length - 1].matches("[IVX]*") || arraya[arraya.length - 1].equals("Jr")
+				|| arraya[arraya.length - 1].equals("Sr")) {
+			aLast = arraya[arraya.length - 2];
+		} else {
+			aLast = arraya[arraya.length - 1];
+		}
+		if (arrayb[arrayb.length - 1].matches("[IVX]*") || arrayb[arrayb.length - 1].equals("Jr")
+				|| arrayb[arrayb.length - 1].equals("Sr")) {
+			bLast = arrayb[arrayb.length - 2];
+		} else {
+			bLast = arrayb[arrayb.length - 1];
+		}
+		return aLast.compareTo(bLast);
 	}
 
 }

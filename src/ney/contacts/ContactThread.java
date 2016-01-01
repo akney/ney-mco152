@@ -1,19 +1,17 @@
 package ney.contacts;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.JList;
 
 public class ContactThread extends Thread {
-	private ContactArrayList contacts;
-	private String[] names;
-	private JList list;
+	private Contact[] contacts;
+	private JList<Contact> list;
 
-	public ContactThread(ContactArrayList contacts, String[] names, JList list) {
+	public ContactThread(Contact[] contacts, JList<Contact> list) {
 		this.contacts = contacts;
-		this.names = names;
 		this.list = list;
 
 	}
@@ -23,19 +21,13 @@ public class ContactThread extends Thread {
 		try {
 			ContactConnectToInternet connect = new ContactConnectToInternet();
 			contacts = connect.getContacts();
-			names = new String[contacts.size()];
 
-			for (int i = 0; i < contacts.size(); i++) {
-
-				names[i] = contacts.get(i).getName();
-			}
-
-			Arrays.sort(names, new Comparator<String>() {
+			Collections.sort(contacts, new Comparator<Contact>() {
 
 				@Override
-				public int compare(String a, String b) {
-					String[] arraya = a.split(" ");
-					String[] arrayb = b.split(" ");
+				public int compare(Contact a, Contact b) {
+					String[] arraya = a.getName().split(" ");
+					String[] arrayb = b.getName().split(" ");
 					String aLast;
 					String bLast;
 
@@ -56,7 +48,7 @@ public class ContactThread extends Thread {
 
 			});
 
-			list.setListData(names);
+			list.setListData(contacts);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
