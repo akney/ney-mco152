@@ -9,7 +9,7 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
 public class ContactFrame extends JFrame {
-	private Contact[] contacts;
+	private ContactArray contacts;
 	private String[] names;
 	private JList<Contact> list;
 
@@ -30,7 +30,7 @@ public class ContactFrame extends JFrame {
 				if (evt.getClickCount() == 2) {
 					int index = list.locationToIndex(evt.getPoint());// change!
 					if (index < 0 || index >= list.getModel().getSize()) {
-						Contact contact = contacts[index];
+						Contact contact = contacts.get(index);
 
 						contactInfo(contact);
 

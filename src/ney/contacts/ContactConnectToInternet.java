@@ -6,12 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
 
 import com.google.gson.Gson;
 
 public class ContactConnectToInternet {
-	private Contact[] contacts;
+	private ContactArray contacts;
 
 	public ContactConnectToInternet() throws IOException {
 		String urlName = "http://jsonplaceholder.typicode.com/users";
@@ -25,11 +24,11 @@ public class ContactConnectToInternet {
 
 		Gson gson = new Gson();
 
-		contacts = gson.fromJson(br, Arrays.class);
+		contacts = gson.fromJson(br, ContactArray.class);
 
 	}
 
-	public Contact[] getContacts() {
+	public ContactArray getContacts() {
 		return contacts;
 	}
 }
