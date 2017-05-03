@@ -1,2 +1,2 @@
 # ney-mco152
-THis a repository for the computer methodology class.
+This a repository for the computer methodology class.
